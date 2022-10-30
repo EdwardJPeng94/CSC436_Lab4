@@ -1,0 +1,56 @@
+{
+  "posts": [
+    {
+      "title": "Get groceries",
+      "content": "Eggs, milk, bread",
+      "author": "Eddie",
+      "time": "Sat Oct 29 2022 15:05:08 GMT-0500 (Central Daylight Time)",
+      "id": 1,
+      "completed": true,
+      "completedOn": "Sat Oct 29 2022 22:13:54 GMT-0500 (Central Daylight Time)"
+    },
+    {
+      "title": "Make Dinner",
+      "content": "Lasagna, Salad, Red Wine",
+      "author": "Eddie",
+      "time": "Sat Oct 29 2022 15:05:08 GMT-0500 (Central Daylight Time)",
+      "id": 2,
+      "completed": false,
+      "completedOn": ""
+    }
+  ],
+  "users": [
+    {
+      "email": "olivier@mail.com",
+      "password": "$2a$10$Hp2B/l5alKU5ksVMsTzMn.HBldz7dPyFsCiyBOrRXGYtXmWB5jvNu",
+      "id": 1
+    },
+    {
+      "email": "e@gmail.com",
+      "password": "$2a$10$7ziXaE8lXyj3cUUHSQqD8.Vc.Xfqxti.d3SqPBqJuz5sdt2JLOkS6",
+      "id": 2
+    },
+    {
+      "email": "j@gmail.com",
+      "password": "$2a$10$dw9cDk15FjhX7FbZlnfXkOEreCaBUv1r379cjLjCzfMq5RmMF7lR6",
+      "id": 3
+    },
+    {
+      "email": "g@gmail.com",
+      "password": "$2a$10$Ud30QYw6d7qALzwAbrhkhOSCItUIrdnMEwtK82tivDvy0Adi9t/7W",
+      "id": 4
+    },
+    {
+      "email": "k@gmail.com",
+      "password": "$2a$10$fgk8fKmquIh2DlOS1RDbJ.NjDK.bzVOkJodkdT3vWBL/2tFDTnpDW",
+      "id": 5
+    }
+  ],
+  "themes": [
+    {
+      "id": 1,
+      "primaryColor": "deepskyblue",
+      "secondaryColor": "coral"
+    }
+  ]
+}
