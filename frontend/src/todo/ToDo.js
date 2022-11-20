@@ -13,22 +13,24 @@ export default function ToDo({
   completed,
   completedOn,
   check,
-  id,
+  _id,
 }) {
   const { secondaryColor, tertiaryColor } = useContext(ThemeContext);
   const { state, dispatch } = useContext(StateContext);
   const { posts } = state;
 
   const [del, deletePost] = useResource(({ id }) => ({
-    url: `/posts/${id}`,
+    url: `/post/${id}`,
     method: "delete",
+    headers: { Authorization: `${state.user.access_token}` },
   }));
 
   const [toggle, togglePost] = useResource(
     ({ id, completed, completedOn }) => ({
-      url: `/posts/${id}`,
+      url: `/post/${id}`,
       method: "patch",
       data: { id, completed, completedOn },
+      headers: { Authorization: `${state.user.access_token}` },
     })
   );
   return (
@@ -48,13 +50,13 @@ export default function ToDo({
         onClick={(event) => {
           event.preventDefault();
           togglePost({
-            id: id,
+            id: _id,
             completed: !completed,
             completedOn: Date(Date.now()),
           });
           dispatch({
             type: "TOGGLE_TODO",
-            id: id,
+            id: _id,
             check: check,
             completed: completed,
             completedOn: completedOn,
@@ -67,8 +69,8 @@ export default function ToDo({
         value="Delete"
         onClick={(event) => {
           event.preventDefault();
-          deletePost({ id: id });
-          dispatch({ type: "DELETE_TODO", id: id });
+          deletePost({ id: _id });
+          dispatch({ type: "DELETE_TODO", id: _id });
         }}
       />
       <br />

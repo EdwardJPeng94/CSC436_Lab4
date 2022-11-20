@@ -25,24 +25,34 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      document.title = `${user}’s Blog`;
+      document.title = `Eddie’s Blog`;
     } else {
       document.title = "Blog";
     }
   }, [user]);
 
   const [posts, getPosts] = useResource(() => ({
-    url: "/posts",
+    url: "/post",
     method: "get",
+    headers: { Authorization: `${state?.user?.access_token}` },
   }));
 
-  useEffect(getPosts, []);
+  useEffect(() => {
+    getPosts();
+  }, [state?.user?.access_token]);
 
   useEffect(() => {
-    if (posts && posts.data) {
-      dispatch({ type: "FETCH_POSTS", posts: posts.data.reverse() });
+    if (posts && posts.isLoading === false && posts.data) {
+      dispatch({ type: "FETCH_POSTS", posts: posts.data.posts.reverse() });
     }
   }, [posts]);
+  // useEffect(getPosts, []);
+
+  // useEffect(() => {
+  //   if (posts && posts.data) {
+  //     dispatch({ type: "FETCH_POSTS", posts: posts.data.reverse() });
+  //   }
+  // }, [posts]);
 
   return (
     <div>

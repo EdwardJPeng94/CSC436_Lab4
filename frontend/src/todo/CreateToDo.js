@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { StateContext } from "../contexts";
 import { useResource } from "react-request-hook";
@@ -12,11 +12,27 @@ export default function CreateToDo() {
 
   const [post, createPost] = useResource(
     ({ title, content, author, time, id, completed, completedOn }) => ({
-      url: "/posts",
+      url: "/post",
       method: "post",
+      headers: { Authorization: `${state.user.access_token}` },
       data: { title, content, author, time, id, completed, completedOn },
     })
   );
+
+  useEffect(() => {
+    if (post.isLoading === false && post.data) {
+      dispatch({
+        type: "CREATE_TODO",
+        title: post.data.title,
+        content: post.data.content,
+        id: post.data._id,
+        author: user.username,
+        time: Date(Date.now()),
+        completed: false,
+        completedOn: "",
+      });
+    }
+  }, [post]);
 
   return (
     <form
@@ -25,28 +41,28 @@ export default function CreateToDo() {
         createPost({
           title,
           content,
-          author: user,
+          author: user.username,
           time: Date(Date.now()),
-          id: uid,
+          _id: uid,
           completed: null,
           completedOn: null,
         });
-        dispatch({
-          type: "CREATE_TODO",
-          title,
-          content,
-          author: user,
-          id: uid,
-          time: Date(Date.now()),
-          completed: false,
-          completedOn: "",
-        });
-        setUid(uuidv4());
+        // dispatch({
+        //   type: "CREATE_TODO",
+        //   title,
+        //   content,
+        //   author: user,
+        //   id: uid,
+        //   time: Date(Date.now()),
+        //   completed: false,
+        //   completedOn: "",
+        // });
+        //setUid(uuidv4());
       }}
     >
       <br />
       <div>
-        Author: <b>{user}</b>
+        Author: <b>{user.username}</b>
       </div>
       <div>
         <label htmlFor="create-title">Title:</label>

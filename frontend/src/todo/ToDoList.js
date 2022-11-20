@@ -8,13 +8,37 @@ export default function TodoList() {
 
   return (
     <div>
-      {posts.map((p, i) => (
-        <div key={p.id}>
+      {/* {posts.map((p, i) => (
+        <div key={p._id}>
           <ToDo {...p} />
 
           <br />
         </div>
-      ))}
+      ))} */}
+
+      {/* <div>
+        {posts.length === 0 && <h2>No posts found.</h2>}
+        {posts.length > 0 &&
+          posts.map((p, i) => <ToDo {...p} key={p._id | p.id} />)}
+      </div> */}
+
+      <div>
+        {posts.length === 0 && <h2>No posts found.</h2>}
+        {posts.length > 0 &&
+          posts.map((p, i) => (
+            <div key={p._id}>
+              <ToDo {...p} />
+
+              <br />
+            </div>
+          ))}
+      </div>
+
+      {/* <div key={p._id}>
+        <ToDo {...p} />
+
+        <br />
+      </div> */}
     </div>
   );
 }
