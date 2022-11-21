@@ -14,6 +14,7 @@ export default function ToDo({
   completedOn,
   check,
   _id,
+  login,
 }) {
   const { secondaryColor, tertiaryColor } = useContext(ThemeContext);
   const { state, dispatch } = useContext(StateContext);
@@ -39,7 +40,7 @@ export default function ToDo({
       <div>{content}</div>
       <br />
       <i>
-        Written by <b style={{ color: tertiaryColor }}>{author}</b>
+        Written by <b style={{ color: tertiaryColor }}>{login}</b>
       </i>
       <br />
       Created on <b> {time}</b>

@@ -6,10 +6,11 @@ const PostSchema = new Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
   author: { type: Schema.Types.ObjectId, ref: "User" },
-  time: { type: Date, default: Date.now() },
+  time: { type: String, default: Date(Date.now()) },
   id: { type: Number },
   completed: { type: Boolean, default: false },
-  completedOn: { type: Date },
+  completedOn: { type: String },
+  login: { type: String, required: true },
 });
 
 //Export model

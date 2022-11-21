@@ -25,6 +25,7 @@ function todoReducer(state, action) {
         _id: action.id,
         completed: action.completed,
         completedOn: action.completedOn,
+        login: action.login,
       };
       return [newPost, ...state];
     case "TOGGLE_TODO":

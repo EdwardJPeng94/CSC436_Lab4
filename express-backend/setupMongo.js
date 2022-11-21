@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 
 // NEVER DO THIS
 // store the secrets (username, password, etc) in an environment variable instead
-const uri =
-  "mongodb+srv://eddie:csc4361secure@cluster0.jg3dbs8.mongodb.net/?retryWrites=true&w=majority";
+const uri = "";
 
 function connect() {
   const options = { useNewUrlParser: true };

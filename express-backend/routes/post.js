@@ -2,21 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const Post = require("../models/Post");
 
-const privateKey = `-----BEGIN RSA PRIVATE KEY-----
-MIICWgIBAAKBgFk7ROErbcpKf92h6hIDUSQdE9BJ+CKT3lU1OGvESyfcLRru/aKd
-OMfydcqHkX4N5ZkUXRPYaeKZUdp9IqpqZbLAfxQhIK4qxDvMlPpwo7FZgMeJgkpz
-8OaZIOsaQgl/rhJ4eIH/BxCAGuw8BdjvXpUooI6XvLazGhM56Q+mUJRLAgMBAAEC
-gYAsSc6WNAf6L5/nUUXsStkrI4OCDjSqdNoVUKUAWB01W4LHq3cYDxDvrNfp/f+o
-oR0kLYdFIlTrs019ND7Qdp6i0/sVwAP72fMCz0mJ9lwYa0wIhgsCa+zefOVQ1lLe
-jPw8XotG4GTgefxiL7O4bR/o2FJIxlheX4NPiX8VB0G8gQJBAJmIF7V+Y6i1jgrZ
-UvGAxm57pyVa3U42zZTSeRaZgyXdpIjXJvj405Gb7KaZHMEV5EYq1f4kyWeOXqUM
-t97lHO0CQQCUyRLfiCG5uVQ1O4S+LQBEQ43NJTgUWvHHNEV43N6/2i2BQx9/GbCp
-xGljo5K+5y4czNnGiemU0bnE+VEOIocXAkB6P2HZcsy5re5u9wJTJ51YpX6+gK5M
-M9jX0gr2kr9ZbDUxfFcc0Uvs2gHB2ZKKr/q2YC9KEFKJ8VOtCgZyJW41AkBJLw5l
-fSR5ojtVY81Lbf8vlLrvKVuIR6OdhIyXgqzeWYcAie+4KP7Iwp/ELvVDiZsY93o3
-Oib22KIzzR6dgUZJAkBM7gcFBH/FONsBwKV4D1N6I5ADAL99s96RB5xgK7u61UD8
-YSXPm02fqkFHCYIZw20b2GsnUqDh2fQ23byUvy7F
------END RSA PRIVATE KEY-----`;
+const privateKey = ``;
 
 const router = express.Router();
 
@@ -40,10 +26,12 @@ router.post("/", async function (req, res) {
   const post = new Post({
     title: req.body.title,
     content: req.body.content,
+    //problem here too!!!
     author: req.payload.id,
     //id: req.pay,
     completed: req.body.completed,
     completedOn: req.body.completedOn,
+    login: req.body.login,
   });
   return post
     .save()
@@ -52,9 +40,11 @@ router.post("/", async function (req, res) {
         _id: savedPost._id,
         title: savedPost.title,
         content: savedPost.content,
+        //problem is here!!!
         author: savedPost.author,
         completed: savedPost.completed,
         completedOn: savedPost.completedOn,
+        login: savedPost.login,
       });
     })
     .catch((error) => {
@@ -88,6 +78,7 @@ router.patch("/:id", async function (req, res, next) {
     author: req.body.author,
     completed: req.body.completed,
     completedOn: req.body.completedOn,
+    login: req.body.login,
   };
 
   const post = await Post.findOneAndUpdate(filter, update);

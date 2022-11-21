@@ -11,11 +11,20 @@ export default function CreateToDo() {
   const [uid, setUid] = useState(uuidv4());
 
   const [post, createPost] = useResource(
-    ({ title, content, author, time, id, completed, completedOn }) => ({
+    ({ title, content, author, time, id, completed, completedOn, login }) => ({
       url: "/post",
       method: "post",
       headers: { Authorization: `${state.user.access_token}` },
-      data: { title, content, author, time, id, completed, completedOn },
+      data: {
+        title,
+        content,
+        author,
+        time,
+        id,
+        completed,
+        completedOn,
+        login,
+      },
     })
   );
 
@@ -30,6 +39,7 @@ export default function CreateToDo() {
         time: Date(Date.now()),
         completed: false,
         completedOn: "",
+        login: user.username,
       });
     }
   }, [post]);
@@ -46,6 +56,7 @@ export default function CreateToDo() {
           _id: uid,
           completed: null,
           completedOn: null,
+          login: user.username,
         });
         // dispatch({
         //   type: "CREATE_TODO",
@@ -57,7 +68,7 @@ export default function CreateToDo() {
         //   completed: false,
         //   completedOn: "",
         // });
-        //setUid(uuidv4());
+        setUid(uuidv4());
       }}
     >
       <br />
