@@ -9,6 +9,7 @@ export default function Logout() {
       onSubmit={(e) => {
         e.preventDefault();
         dispatch({ type: "LOGOUT" });
+        return null;
       }}
     >
       Logged in as: <b>{user.username}</b>
